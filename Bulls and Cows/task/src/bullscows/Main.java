@@ -16,16 +16,40 @@ class BullsCowsGame {
     int turnCount;
 
     public BullsCowsGame(Scanner scanner) {
-        this.secretCode = sCodeFourDiffDigits();
+        this.secretCode = "0";
         this.turnCount = 0;
         this.scanner = scanner;
     }
 
     String sCodeFourDiffDigits() {
-        return "9305";
+        long pseudoRandomNumber = System.nanoTime();
+        int length = scanner.nextInt();
+        if (length > 10) {
+            System.out.println("Error: can't generate a secret number with a length of "
+                    + length + " because there aren't enough unique digits.");
+            System.exit(0);
+        }
+        var result = new StringBuilder();
+        while (result.length() < length) {
+            if (pseudoRandomNumber == 0) {
+                pseudoRandomNumber = System.nanoTime();
+            }
+            var digit = pseudoRandomNumber % 10;
+            pseudoRandomNumber /= 10;
+            if (result.length() == 0 && digit == 0) {
+                continue;
+            }
+            if (result.indexOf(String.valueOf(digit)) == -1) {
+                result.append(String.valueOf(digit));
+            }
+        }
+        return result.toString();
     }
 
     void playBCgame() {
+        secretCode = sCodeFourDiffDigits();
+        System.out.println("The random secret number is " + secretCode);
+        System.exit(0);
         System.out.println("The secret code is prepared: ****.");
         while (true) {
             incrementTurnCount();
@@ -65,16 +89,12 @@ class BullsCowsGame {
                 }
             }
 
-            //System.out.printf("Grade: %s.\n", Grade);
+            System.out.printf("Grade: %s.\n", Grade);
 
-            //temp to satisfy Stage 2 test
-            System.out.printf("Grade: %s. The secret code is %s.\n", Grade, sCodeFourDiffDigits());
-            break;
-
-            /*if (bc[0] == 4) {
+            if (bc[0] == 4) {
                 System.out.printf("Congrats! The secret code is %s.\n", secretCode);
                 break;
-            }*/
+            }
         }
     }
 
