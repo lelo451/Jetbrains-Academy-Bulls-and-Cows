@@ -244,6 +244,15 @@ files:
         }
     }
   learner_created: false
+- name: src/bullscows/SecretCode.java
+  visible: true
+  learner_created: true
+- name: src/bullscows/Game.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/53/stages/290/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Tue, 22 Dec 2020 15:22:24 UTC
+record: 4
